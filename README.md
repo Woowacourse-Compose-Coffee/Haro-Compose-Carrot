@@ -51,3 +51,9 @@
 ## AddButton
 
 > 글 작성을 하게 해주는 버튼
+
+---
+
+# 알아보고자 할 내용 정리
+
+- [] painter와 ImageVector의 내부구현 차이
