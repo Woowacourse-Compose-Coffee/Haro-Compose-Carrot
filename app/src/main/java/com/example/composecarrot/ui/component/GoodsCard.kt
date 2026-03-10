@@ -26,11 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composecarrot.R
 import com.example.composecarrot.ui.model.GoodsData
+import com.example.composecarrot.ui.theme.pretendardFamily
 
 @Composable
-fun GoodsCard(goodsData: GoodsData) {
+fun GoodsCard(modifier: Modifier = Modifier, goodsData: GoodsData) {
     Row(
-        modifier = Modifier.padding(15.dp).fillMaxWidth().height(108.dp),
+        modifier = modifier.fillMaxWidth().height(108.dp),
         horizontalArrangement = Arrangement.spacedBy(17.dp)
     ) {
         Image(
@@ -78,12 +79,12 @@ fun GoodsCard(goodsData: GoodsData) {
 
 @Composable
 fun DistinctInfoText(text: String) {
-    Text(text, fontSize = 14.sp, fontWeight = FontWeight.W500, color = Color(0xFF868C93))
+    Text(text, fontSize = 14.sp, fontWeight = FontWeight.W500, color = Color(0xFF868C93), fontFamily = pretendardFamily)
 }
 
 @Composable
 fun GoodsInfoText(text: String) {
-    Text(text, fontSize = 17.sp, fontWeight = FontWeight.W500, color = Color(0xFF000000))
+    Text(text, fontSize = 17.sp, fontWeight = FontWeight.W500, color = Color(0xFF000000), fontFamily = pretendardFamily)
 }
 
 @Composable
