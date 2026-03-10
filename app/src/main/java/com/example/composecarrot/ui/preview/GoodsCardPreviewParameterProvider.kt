@@ -37,5 +37,5 @@ private class GoodsCardPreviewParameterProvider : PreviewParameterProvider<Goods
 fun GoodsCardPreview(
     @PreviewParameter(GoodsCardPreviewParameterProvider::class) goodsData: GoodsData
 ) {
-    GoodsCard(goodsData)
+    GoodsCard(goodsData = goodsData)
 }
