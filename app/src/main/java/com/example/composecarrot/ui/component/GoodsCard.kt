@@ -58,7 +58,8 @@ fun GoodsCard(goodsData: GoodsData) {
                 Icon(
                     modifier = Modifier.padding(end = 4.dp).size(18.dp),
                     painter = painterResource(R.drawable.ic_menu_kebab_gray),
-                    contentDescription = "더보기 버튼"
+                    contentDescription = "더보기 버튼",
+                    tint = Color(0xFF868C93)
                 )
             }
             Row(
@@ -94,7 +95,8 @@ fun HeartComponent(num: Int) {
         Icon(
             painter = painterResource(id = R.drawable.ic_like_sm),
             contentDescription = "좋아요 아이콘",
-            modifier = Modifier.size(18.dp)
+            modifier = Modifier.size(18.dp),
+            tint = Color(0xFF868C93)
         )
         DistinctInfoText("$num")
     }
@@ -109,7 +111,8 @@ fun ChatComponent(num: Int) {
         Icon(
             painter = painterResource(id = R.drawable.ic_chat_sm),
             contentDescription = "채팅 아이콘",
-            modifier = Modifier.size(18.dp)
+            modifier = Modifier.size(18.dp),
+            tint = Color(0xFF868C93)
         )
         DistinctInfoText("$num")
     }
@@ -124,7 +127,8 @@ fun DistinctInfoComponent(distinct: Double, locale: String, time: String, maxDis
         if (distinct < maxDistinct) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_location),
-                contentDescription = "위치 아이콘"
+                contentDescription = "위치 아이콘",
+                tint = Color(0xFF868C93)
             )
             DistinctInfoText("${distinct}km")
             DistinctInfoText("·")
