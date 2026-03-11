@@ -11,11 +11,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composecarrot.R
 import com.example.composecarrot.ui.model.GoodsData
 import com.example.composecarrot.ui.model.LocaleData
 
+@Preview(showBackground = true)
 @Composable
 fun MainPage() {
 
@@ -42,6 +44,7 @@ fun MainPage() {
             id = R.drawable.img_list_home_3,
             title = "M) 코튼 리브드 크루 넥 니트  미디엄 그레이",
             price = "20,000원",
+            reservation = true,
             localeData = LocaleData(
                 distinct = 1.9, locale = "장지동", time = "1시간 전"
             )

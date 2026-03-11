@@ -1,21 +1,25 @@
 package com.example.composecarrot.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -31,7 +35,9 @@ import com.example.composecarrot.ui.theme.pretendardFamily
 @Composable
 fun GoodsCard(modifier: Modifier = Modifier, goodsData: GoodsData) {
     Row(
-        modifier = modifier.fillMaxWidth().height(108.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(108.dp),
         horizontalArrangement = Arrangement.spacedBy(17.dp)
     ) {
         Image(
@@ -39,25 +45,40 @@ fun GoodsCard(modifier: Modifier = Modifier, goodsData: GoodsData) {
             contentDescription = "상품 이미지",
             Modifier.size(108.dp)
         )
-        Column (
+        Column(
             modifier = Modifier.fillMaxHeight(),
             verticalArrangement = Arrangement.SpaceBetween
-        ){
-            Row (
+        ) {
+            Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Column (
+                Column(
                     modifier = Modifier.width(223.dp),
                     verticalArrangement = Arrangement.spacedBy(7.dp),
                     horizontalAlignment = Alignment.Start
                 ) {
                     GoodsInfoText(goodsData.title)
-                    DistinctInfoComponent(distinct = goodsData.localeData.distinct, locale = goodsData.localeData.locale, time = goodsData.localeData.time, maxDistinct = 4.0)
-                    GoodsInfoText(goodsData.price)
+                    DistinctInfoComponent(
+                        distinct = goodsData.localeData.distinct,
+                        locale = goodsData.localeData.locale,
+                        time = goodsData.localeData.time,
+                        maxDistinct = 4.0
+                    )
+                    Row (
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        if (goodsData.reservation) {
+                            ReservationComponent()
+                            Spacer(modifier = Modifier.width(4.dp))
+                        }
+                        GoodsInfoText(goodsData.price)
+                    }
                 }
                 Icon(
-                    modifier = Modifier.padding(end = 4.dp).size(18.dp),
+                    modifier = Modifier
+                        .padding(end = 4.dp)
+                        .size(18.dp),
                     painter = painterResource(R.drawable.ic_menu_kebab_gray),
                     contentDescription = "더보기 버튼",
                     tint = Color(0xFF868C93)
@@ -68,7 +89,11 @@ fun GoodsCard(modifier: Modifier = Modifier, goodsData: GoodsData) {
                 horizontalArrangement = Arrangement.End
             ) {
                 if (goodsData.chatNum != 0) ChatComponent(goodsData.chatNum)
-                if (goodsData.chatNum != 0 && goodsData.heartNum != 0) Box(modifier = Modifier.width(2.dp))
+                if (goodsData.chatNum != 0 && goodsData.heartNum != 0) Box(
+                    modifier = Modifier.width(
+                        2.dp
+                    )
+                )
                 if (goodsData.heartNum != 0) HeartComponent(goodsData.heartNum)
             }
         }
@@ -79,12 +104,24 @@ fun GoodsCard(modifier: Modifier = Modifier, goodsData: GoodsData) {
 
 @Composable
 fun DistinctInfoText(text: String) {
-    Text(text, fontSize = 14.sp, fontWeight = FontWeight.W500, color = Color(0xFF868C93), fontFamily = pretendardFamily)
+    Text(
+        text,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.W500,
+        color = Color(0xFF868C93),
+        fontFamily = pretendardFamily
+    )
 }
 
 @Composable
 fun GoodsInfoText(text: String) {
-    Text(text, fontSize = 17.sp, fontWeight = FontWeight.W500, color = Color(0xFF000000), fontFamily = pretendardFamily)
+    Text(
+        text,
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W500,
+        color = Color(0xFF000000),
+        fontFamily = pretendardFamily
+    )
 }
 
 @Composable
@@ -137,5 +174,18 @@ fun DistinctInfoComponent(distinct: Double, locale: String, time: String, maxDis
         DistinctInfoText(locale)
         DistinctInfoText("·")
         DistinctInfoText(time)
+    }
+}
+
+@Composable
+fun ReservationComponent() {
+    Box(
+        modifier = Modifier
+            .size(38.dp, 20.dp)
+            .clip(shape = RoundedCornerShape(3.dp))
+            .background(color = Color(0xFF1FA174)),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("예약중", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.W700, fontFamily = pretendardFamily)
     }
 }
