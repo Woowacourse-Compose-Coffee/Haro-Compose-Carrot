@@ -1,18 +1,29 @@
 package com.example.composecarrot.ui.component
 
+import android.R.attr.x
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.example.composecarrot.R
 import com.example.composecarrot.ui.model.GoodsData
 import com.example.composecarrot.ui.model.LocaleData
@@ -75,24 +86,55 @@ fun MainPage() {
         )
     )
 
-    Column (
-        modifier = Modifier.padding(horizontal = 16.dp)
-    ) {
-        HeaderBar(modifier = Modifier.padding(top = 43.dp, bottom = 27.dp))
-        ConditionBar()
+    Column {
+        HeaderBar(
+            modifier = Modifier.padding(
+                top = 43.dp,
+                bottom = 27.dp,
+                start = 16.dp,
+                end = 16.dp
+            )
+        )
+        ConditionBar(modifier = Modifier.padding(horizontal = 16.dp))
         Spacer(modifier = Modifier.height(31.dp))
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(17.dp)
-        ) {
-            itemsIndexed(items) { index, item ->
-                Column {
-                    GoodsCard(goodsData = item)
-                    Spacer(modifier = Modifier.height(17.dp))
-                    if (index != items.lastIndex) {
-                        HorizontalDivider(color = Color(0xFFF4F5F7))
+        Box(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(17.dp)
+            ) {
+                itemsIndexed(items) { index, item ->
+                    Column {
+                        GoodsCard(goodsData = item)
+                        Spacer(modifier = Modifier.height(17.dp))
+                        if (index != items.lastIndex) {
+                            HorizontalDivider(color = Color(0xFFF4F5F7))
+                        }
                     }
                 }
             }
+            WritingButton(
+                modifier = Modifier
+                    .padding(end = 16.dp, bottom = 80.dp)
+                    .size(width = 97.dp, height = 50.dp)
+                    .clip(shape = RoundedCornerShape(50.dp))
+                    .background(color = Color(0xFFFF6E10))
+                    .align(Alignment.BottomEnd)
+            )
+            Box (
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .fillMaxWidth()
+            ) {
+                HorizontalDivider(modifier = Modifier.zIndex(1f))
+                NavigationBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = Color.White)
+                        .padding(start = 27.dp, end = 21.dp, top = 6.dp, bottom = 9.dp)
+                )
+            }
+
+
         }
     }
 }
